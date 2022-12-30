@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
-import { NotFoundError, errorHandler } from '@arpticketing/common';
+import { NotFoundError, errorHandler, currentUser } from '@arpticketing/common';
 
 import { createTicketRouter } from './routes/new';
 
@@ -15,6 +15,8 @@ app.use(
     secure: process.env.NODE_ENV !== 'test',
   })
 );
+
+app.use(currentUser);
 
 app.use(createTicketRouter);
 
