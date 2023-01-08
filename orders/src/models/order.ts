@@ -38,13 +38,13 @@ const orderSchema = new mongoose.Schema(
     },
     ticket: {
       type: mongoose.Schema.Types.ObjectId,
-      res: 'Ticket',
+      ref: 'Ticket',
     },
   },
   {
     toJSON: {
       transform(doc, ret) {
-        ret._id = ret._id;
+        ret.id = ret._id;
         delete ret._id;
       },
     },
