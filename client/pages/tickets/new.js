@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
 
 const NewTicket = () => {
@@ -11,7 +12,7 @@ const NewTicket = () => {
       title,
       price,
     },
-    onSuccess: (ticket) => console.log(ticket),
+    onSuccess: () => Router.push('/'),
   });
 
   const onSubmit = (event) => {
@@ -23,35 +24,36 @@ const NewTicket = () => {
   const onBlur = () => {
     const value = parseFloat(price);
 
-    if (isNaN()) {
+    if (isNaN(value)) {
       return;
     }
+
     setPrice(value.toFixed(2));
   };
 
   return (
     <div>
-      <h1>Create a new ticket</h1>
+      <h1>Create a Ticket</h1>
       <form onSubmit={onSubmit}>
-        <div classname="form-group">
+        <div className="form-group">
           <label>Title</label>
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            classname="form-control"
+            className="form-control"
           />
         </div>
-        <div classname="form-group">
-          <label>Title</label>
+        <div className="form-group">
+          <label>Price</label>
           <input
             value={price}
             onBlur={onBlur}
             onChange={(e) => setPrice(e.target.value)}
-            classname="form-control"
+            className="form-control"
           />
         </div>
         {errors}
-        <button classname="btn btn-primary">Submit</button>
+        <button className="btn btn-primary">Submit</button>
       </form>
     </div>
   );
