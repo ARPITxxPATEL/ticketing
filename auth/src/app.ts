@@ -25,6 +25,7 @@ app.use(signoutRouter);
 app.use(signupRouter);
 
 app.all('*', async (req, res) => {
+  console.log('oooofff ----');
   throw new NotFoundError();
 });
 

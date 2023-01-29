@@ -65,7 +65,7 @@ it('publishes a ticket updated event', async () => {
   const ticketUpdatedData = JSON.parse(
     (natsWrapper.client.publish as jest.Mock).mock.calls[0][1]
   );
-  console.log((natsWrapper.client.publish as jest.Mock).mock.calls);
+  console.log(ticketUpdatedData);
 
   expect(data.id).toEqual(ticketUpdatedData.orderId);
 });
