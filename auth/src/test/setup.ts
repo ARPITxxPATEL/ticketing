@@ -9,12 +9,13 @@ declare global {
 
 let mongo: any;
 beforeAll(async () => {
-  process.env.JWT_KEY = 'abcd';
+  jest.clearAllMocks();
+  process.env.JWT_KEY = 'asdf';
 
   mongo = await MongoMemoryServer.create();
   const mongoUri = mongo.getUri();
 
-  await mongoose.connect(mongoUri, {});
+  await mongoose.connect(mongoUri);
 });
 
 beforeEach(async () => {
@@ -37,7 +38,7 @@ global.signin = async () => {
   const password = 'password';
 
   const response = await request(app)
-    .post('api/users/signup')
+    .post('/api/users/signup')
     .send({ email, password })
     .expect(201);
 
